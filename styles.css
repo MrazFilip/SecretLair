@@ -1,0 +1,174 @@
+@property --rotate {
+    syntax: "<angle>";
+    initial-value: 132deg;
+    inherits: false;
+}
+
+:root {
+    --card-height: 370px;
+    --card-width: 265px;
+
+    --background: #262626;
+    --text: #F2F2F2;
+    --color-rotation_1: #FFFFFF;
+    --color-rotation_2: #D5D1D1;
+    --color-rotation_3: #ACAAAA;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.cr-logo {
+    height: 3rem;
+}
+
+html {
+    font-family: "Freeman", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--text);
+}
+
+.line {
+    width: 80%;
+    height: 2px;
+    background: var(--text);
+    opacity: 0.3;
+}
+
+body {
+    background: var(--background);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+main {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+main nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    text-decoration: underline;
+}
+
+main .cards {
+    width: 90%;
+    margin: 1rem 0;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    background-color: transparent;
+    width: var(--card-width);
+    height: var(--card-height);
+    padding: 3px;
+    position: relative;
+    border-radius: 0.5rem;
+    text-align: center;
+    display: flex;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.card a {
+    opacity: 0;
+    transition: 0.5s linear;
+    margin-top: 4rem;
+    width: 100%;
+}
+
+.card:hover {
+    color: var(--text);
+    transition: color 1s, background-color 1s;
+    background-color: rgba(0,0,0,0.6);;
+    background-blend-mode: darken;
+}
+
+.card:hover:before, .card:hover:after {
+    animation: spin 2.5s linear infinite;
+    opacity: 1;
+}
+
+.card:hover a {
+    opacity: 1;
+}
+
+.card::before {
+    content: "";
+    width: 104%;
+    height: 102%;
+    border-radius: 8px;
+    background-image: linear-gradient(
+            var(--rotate)
+            var(--color-rotation_1),
+            var(--color-rotation_2),
+            var(--color-rotation_3));
+    position: absolute;
+    z-index: -1;
+    top: -1%;
+    left: -2%;
+    opacity: 0;
+}
+
+.card::after {
+    position: absolute;
+    content: "";
+    top: calc(var(--card-height) / 6);
+    left: 0;
+    right: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    transform: scale(0.8);
+    filter: blur(calc(var(--card-height) / 6));
+    background-image: linear-gradient(
+            var(--rotate),
+            var(--color-rotation_1),
+            var(--color-rotation_2),
+            var(--color-rotation_3));
+    opacity: 0;
+    transition: opacity .5s;
+    animation: spin 2.5s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        --rotate: 0deg;
+    }
+    100% {
+        --rotate: 360deg;
+    }
+}
+
+a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 1.5rem;
+}
